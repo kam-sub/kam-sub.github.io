@@ -18,7 +18,7 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-color); /* Base dark background */
+    background-color: var(--bg-color); 
 }
 
 body {
@@ -29,8 +29,6 @@ body {
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 40px 40px;
-    
-    /* Clean scroll fix with NO position: relative */
     overflow-x: hidden; 
 }
 
@@ -43,14 +41,15 @@ body {
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
+    padding: 1rem 5%; 
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    z-index: 2000;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -84,7 +83,7 @@ body {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 2001;
 }
 
 .hamburger span {
@@ -170,7 +169,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(100%);
+    filter: none;
 }
 
 /* --- Buttons --- */
@@ -441,7 +440,7 @@ body {
 
 /* --- Glowing Background Blobs --- */
 .blob {
-    position: absolute; /* Changed to absolute so they stay at the top and scroll away */
+    position: absolute; 
     filter: blur(120px);
     z-index: -1; 
     opacity: 0.5;
@@ -459,7 +458,6 @@ body {
 }
 
 .blob-2 {
-    /* Changed from 'bottom' to 'top: 50vh' so it stays in the hero section */
     top: 50vh; 
     right: -10%;
     width: 600px;
@@ -487,24 +485,34 @@ body {
 
 /* --- Mobile Optimization Polish (Max-width: 768px) --- */
 @media screen and (max-width: 768px) {
-    /* Mobile Hamburger Logic */
+    html, body {
+        overflow-x: hidden;
+        width: 100vw;
+        position: relative;
+    }
+
+    /* Navbar formatting */
+    .navbar {
+        padding: 1rem 1.5rem; 
+    }
+
+    /* Hamburger & Menu Logic */
     .hamburger {
         display: flex; 
     }
 
     .nav-links {
-        position: absolute;
-        top: 100%;
-        right: -100%;
+        position: fixed; 
+        top: 70px; 
+        right: -100%; 
         flex-direction: column;
-        background: var(--nav-bg);
-        width: 250px;
+        background: rgba(10, 15, 22, 0.98); 
+        width: 70%; 
+        height: auto;
         padding: 2rem;
-        border-radius: 0 0 0 15px;
-        border-left: 1px solid rgba(255,255,255,0.05);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        transition: right 0.4s cubic-bezier(0.5, 0, 0, 1);
-        backdrop-filter: blur(15px);
+        border-radius: 15px 0 0 15px;
+        transition: right 0.4s ease;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
 
     .nav-links.active {
@@ -524,6 +532,7 @@ body {
     /* Adjust Layout & Padding */
     .hero-wrapper {
         flex-direction: column-reverse;
+        padding-top: 100px;
         justify-content: center;
         text-align: center;
         gap: 2rem;
